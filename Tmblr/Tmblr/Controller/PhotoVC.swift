@@ -48,7 +48,8 @@ class PhotoVC: UIViewController {
 extension PhotoVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return posts.count
-     }
+        
+     } // end numberOfRowsInSection
      
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
@@ -67,6 +68,7 @@ extension PhotoVC: UITableViewDataSource, UITableViewDelegate {
          }
          
          return cell ?? UITableViewCell()
-     }
-}
+     } // end cellForRowAt
+    
+} // end extension
 
