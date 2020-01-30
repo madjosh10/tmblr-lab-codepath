@@ -7,7 +7,7 @@ In this lab, you'll build the first part of an app that will allow users to view
 
 ### Plan of attack
 1. Get a list of tumblr post images--not including the captions(will implement later)
-2. Display each image from the posts in a way that scrolls up and down to see all movies.
+2. Display each image from the posts in a way that scrolls up and down to see all posts.
 ### Bonus User stories
 - [X] User can view the app on various sizes and orientation
 - [X] Run your app on a real device
