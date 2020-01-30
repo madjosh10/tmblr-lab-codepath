@@ -35,9 +35,9 @@ class PhotoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let responseData = dataDictionary["response"] as! [String: Any]
             
             self.posts = responseData["posts"] as! [[String: Any]]
-
+            // TODO: Reload the table view
+            self.tableView.reloadData()
             
-              // TODO: Reload the table view
           }
         }
         task.resume()
@@ -49,7 +49,22 @@ class PhotoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+        let post = posts[indexPath.row]
+        
+        if let photos = post["photos"] as? [[String: Any]] {
+            let photo = photos[0]
+            let originalSize = photo["original_size"] as! [String: Any]
+            let urlString = originalSize["url"] as! String
+            
+            let url = URL(string: urlString)
+            
+            cell.tmblrImage.af_setImage(withURL: url!)
+            
+            return cell
+        }
+        
+        return cell ?? UITableViewCell()
     }
 
 } // end PhotoVC
