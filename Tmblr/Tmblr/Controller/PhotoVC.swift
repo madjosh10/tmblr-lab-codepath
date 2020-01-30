@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class PhotoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PhotoVC: UIViewController {
 
     var posts: [[String: Any]] = []
     
@@ -43,28 +43,30 @@ class PhotoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     } // end viewDidLoad()
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
-        let post = posts[indexPath.row]
-        
-        if let photos = post["photos"] as? [[String: Any]] {
-            let photo = photos[0]
-            let originalSize = photo["original_size"] as! [String: Any]
-            let urlString = originalSize["url"] as! String
-            
-            let url = URL(string: urlString)
-            
-            cell.tmblrImage.af_setImage(withURL: url!)
-            
-            return cell
-        }
-        
-        return cell ?? UITableViewCell()
-    }
-
 } // end PhotoVC
+
+extension PhotoVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return posts.count
+     }
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+         let post = posts[indexPath.row]
+         
+         if let photos = post["photos"] as? [[String: Any]] {
+             let photo = photos[0]
+             let originalSize = photo["original_size"] as! [String: Any]
+             let urlString = originalSize["url"] as! String
+             
+             let url = URL(string: urlString)
+             
+             cell.tmblrImage.af_setImage(withURL: url!)
+             
+             return cell
+         }
+         
+         return cell ?? UITableViewCell()
+     }
+}
 
