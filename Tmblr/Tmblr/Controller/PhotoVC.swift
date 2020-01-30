@@ -32,8 +32,8 @@ class PhotoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
               // TODO: Get the posts and store in posts property
             let responseData = dataDictionary["response"] as! [String: Any]
-            
             self.posts = responseData["posts"] as! [[String: Any]]
+            
             // TODO: Reload the table view
             self.tableView.reloadData()
             
