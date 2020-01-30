@@ -29,7 +29,6 @@ class PhotoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
               print(error.localizedDescription)
            } else if let data = data,
               let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-              print(dataDictionary)
 
               // TODO: Get the posts and store in posts property
             let responseData = dataDictionary["response"] as! [String: Any]
